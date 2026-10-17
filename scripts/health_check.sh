@@ -6,7 +6,7 @@ RESULT=$(curl -s -o /dev/null -w "%{http_code} %{time_total}" "$URL")
 STATUS=$(echo "$RESULT" | awk '{print $1}')
 TIME=$(echo "$RESULT" | awk '{print $2}')
 
-if [ "$STATUS" -eq 403 ] | | [ "$STATUS" -eq 200 ]; then
+if [[ "$STATUS" -eq 403 || "$STATUS" -eq 200 ]] ; then
   echo "OK: $URL is UP (HTTP $STATUS) - Response time: ${TIME}s"
 else
   echo "ERROR: $URL is DOWN or has issues (HTTP $STATUS) - Response time: ${TIME}s"
